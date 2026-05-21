@@ -1,0 +1,25 @@
+@use '@angular/material' as mat;
+@include mat.core();
+$theme: mat.define-light-theme((
+  color: (
+    primary: mat.define-palette(mat.$indigo-palette),
+    accent: mat.define-palette(mat.$blue-palette)
+  ),
+  density: 0
+));
+html { @include mat.all-component-themes($theme); }
+body { margin: 0; font-family: Inter, Roboto, Arial, sans-serif; background: #f6f7fb; color: #172033; }
+.page { max-width: 1180px; margin: 24px auto; padding: 0 20px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.card { background: white; border-radius: 18px; padding: 18px; box-shadow: 0 8px 26px rgba(20, 32, 51, .08); }
+.toolbar-spacer { flex: 1 1 auto; }
+.toolbar-user { font-size: 14px; margin-right: 10px; }
+.status { padding: 4px 10px; border-radius: 999px; background: #eef2ff; font-size: 12px; }
+.table { width: 100%; border-collapse: collapse; background: white; border-radius: 16px; overflow: hidden; }
+.table th, .table td { padding: 12px 14px; border-bottom: 1px solid #eef1f6; text-align: left; }
+.table th { color: #586174; font-size: 12px; text-transform: uppercase; }
+.form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.auth-page { min-height: calc(100vh - 64px); display: grid; place-items: center; padding: 24px; }
+.auth-card { width: min(440px, 100%); padding: 18px; border-radius: 8px; }
+.auth-form { display: grid; gap: 12px; padding-top: 20px; }
+.auth-error { color: #b42318; margin: 14px 0 0; }

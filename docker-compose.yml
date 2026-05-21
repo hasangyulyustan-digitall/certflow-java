@@ -1,0 +1,44 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: certflow-java-postgres
+    environment:
+      POSTGRES_DB: certflow_java
+      POSTGRES_USER: certflow
+      POSTGRES_PASSWORD: certflow
+    ports:
+      - "55432:5432"
+    volumes:
+      - certflow_java_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U certflow -d certflow_java"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  api:
+    build:
+      context: ./backend
+    container_name: certflow-java-api
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/certflow_java
+      SPRING_DATASOURCE_USERNAME: certflow
+      SPRING_DATASOURCE_PASSWORD: certflow
+    ports:
+      - "8081:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: certflow-java-frontend
+    ports:
+      - "4300:80"
+    depends_on:
+      - api
+
+volumes:
+  certflow_java_pgdata:

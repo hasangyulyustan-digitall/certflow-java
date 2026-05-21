@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/certflow_java}
+    username: ${SPRING_DATASOURCE_USERNAME:certflow}
+    password: ${SPRING_DATASOURCE_PASSWORD:certflow}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
